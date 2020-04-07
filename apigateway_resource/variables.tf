@@ -6,4 +6,4 @@ variable "resource_list" {
 
 variable "api_name" {}
 
-variable "description" {}
+variable "api_description" {}
