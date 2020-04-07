@@ -13,3 +13,7 @@ output "prod_url" {
 output "execution_arn" {
   value = aws_api_gateway_rest_api.execution_ar
 }
+
+output "root_resource_id" {
+  value = aws_api_gateway_rest_api.root_resource_id
+}

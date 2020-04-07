@@ -1,6 +1,6 @@
 resource "aws_api_gateway_resource" "api_version_1" {
     rest_api_id = var.restapi_id
-    parent_id   = aws_api_gateway_rest_api.apigateway_api.root_resource_id
+    parent_id   = var.root_resource_id
     path_part   = "v1"
 }
 
