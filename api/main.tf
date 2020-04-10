@@ -5,13 +5,13 @@ resource "aws_api_gateway_rest_api" "api" {
 
 # STAGES
 resource "aws_api_gateway_stage" "prod_stage" {
-  stage_name    = "${var.api_name}_PROD"
+  stage_name    = "prod"
   rest_api_id   = aws_api_gateway_rest_api.api.id
   deployment_id = aws_api_gateway_deployment.prod_deployment.id
 }
 
 resource "aws_api_gateway_stage" "dev_stage" {
-  stage_name    = "${var.api_name}_DEV"
+  stage_name    = "dev"
   rest_api_id   = aws_api_gateway_rest_api.api.id
   deployment_id = aws_api_gateway_deployment.dev_deployment.id
 }
@@ -19,13 +19,13 @@ resource "aws_api_gateway_stage" "dev_stage" {
 resource "aws_api_gateway_deployment" "prod_deployment" {
   depends_on  = [aws_api_gateway_integration.get_integration, aws_api_gateway_integration.post_integration, aws_api_gateway_integration.put_integration]
   rest_api_id = aws_api_gateway_rest_api.api.id
-  stage_name  = "${var.api_name}_PROD"
+  stage_name  = "dev"
 }
 
 resource "aws_api_gateway_deployment" "dev_deployment" {
   depends_on  = [aws_api_gateway_integration.get_integration, aws_api_gateway_integration.post_integration, aws_api_gateway_integration.put_integration]
   rest_api_id = aws_api_gateway_rest_api.api.id
-  stage_name  = "${var.api_name}_DEV"
+  stage_name  = "dev"
 }
 
 # RESOURCES
