@@ -37,6 +37,8 @@ resource "aws_api_gateway_method" "put_method" {
     resource_id          = element(aws_api_gateway_resource.resource.*.id, count.index)
     http_method          = "PUT"
     authorization        = "NONE"
+    authorization        = "COGNITO_USER_POOLS"
+    authorizer_id        = aws_api_gateway_authorizer.cognito_authorizer.id
 }
 
 resource "aws_api_gateway_method" "get_method" {
@@ -45,6 +47,8 @@ resource "aws_api_gateway_method" "get_method" {
     resource_id          = element(aws_api_gateway_resource.resource.*.id, count.index)
     http_method          = "GET"
     authorization        = "NONE"
+    authorization        = "COGNITO_USER_POOLS"
+    authorizer_id        = aws_api_gateway_authorizer.cognito_authorizer.id
 }
 
 resource "aws_api_gateway_method" "post_method" {
@@ -53,6 +57,8 @@ resource "aws_api_gateway_method" "post_method" {
     resource_id          = element(aws_api_gateway_resource.resource.*.id, count.index)
     http_method          = "POST"
     authorization        = "NONE"
+    authorization        = "COGNITO_USER_POOLS"
+    authorizer_id        = aws_api_gateway_authorizer.cognito_authorizer.id
 }
 
 # INTEGRATIONS
@@ -87,4 +93,15 @@ resource "aws_api_gateway_integration" "put_integration" {
     integration_http_method = "POST"
     type                    = "AWS_PROXY"
     uri                     = var.lambda_uri
+}
+
+resource "aws_api_gateway_authorizer" "cognito_authorizer" {
+  name          = "cognito_authorizer"
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  type          = "COGNITO_USER_POOLS"
+  provider_arns = aws_cognito_user_pool.user_pool.arn
+}
+
+resource "aws_cognito_user_pool" "user_pool" {
+  name = "HC_USER_POOL"
 }
