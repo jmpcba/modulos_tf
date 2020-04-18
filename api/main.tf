@@ -101,5 +101,11 @@ resource "aws_api_gateway_authorizer" "cognito_authorizer" {
 }
 
 resource "aws_cognito_user_pool" "user_pool" {
-  name = "HC_USER_POOL"
+  name = "${var.api_name} user pool"
+}
+
+resource "aws_cognito_user_pool_client" "user_pool_client" {
+  name = "${var.api_name} user pool client"
+
+  user_pool_id = "${aws_cognito_user_pool.user_pool.id}"
 }
