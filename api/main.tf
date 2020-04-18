@@ -36,7 +36,6 @@ resource "aws_api_gateway_method" "put_method" {
     rest_api_id          = aws_api_gateway_rest_api.api.id
     resource_id          = element(aws_api_gateway_resource.resource.*.id, count.index)
     http_method          = "PUT"
-    authorization        = "NONE"
     authorization        = "COGNITO_USER_POOLS"
     authorizer_id        = aws_api_gateway_authorizer.cognito_authorizer.id
 }
@@ -46,7 +45,6 @@ resource "aws_api_gateway_method" "get_method" {
     rest_api_id          = aws_api_gateway_rest_api.api.id
     resource_id          = element(aws_api_gateway_resource.resource.*.id, count.index)
     http_method          = "GET"
-    authorization        = "NONE"
     authorization        = "COGNITO_USER_POOLS"
     authorizer_id        = aws_api_gateway_authorizer.cognito_authorizer.id
 }
@@ -56,7 +54,6 @@ resource "aws_api_gateway_method" "post_method" {
     rest_api_id          = aws_api_gateway_rest_api.api.id
     resource_id          = element(aws_api_gateway_resource.resource.*.id, count.index)
     http_method          = "POST"
-    authorization        = "NONE"
     authorization        = "COGNITO_USER_POOLS"
     authorizer_id        = aws_api_gateway_authorizer.cognito_authorizer.id
 }
