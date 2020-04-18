@@ -107,5 +107,5 @@ resource "aws_cognito_user_pool" "user_pool" {
 resource "aws_cognito_user_pool_client" "user_pool_client" {
   name = "${var.api_name} user pool client"
 
-  user_pool_id = "${aws_cognito_user_pool.user_pool.id}"
+  user_pool_id = aws_cognito_user_pool.user_pool.id
 }
