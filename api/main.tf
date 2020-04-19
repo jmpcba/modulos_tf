@@ -102,6 +102,9 @@ resource "aws_api_gateway_authorizer" "cognito_authorizer" {
 
 resource "aws_cognito_user_pool" "user_pool" {
   name = "${var.api_name} user pool"
+  auto_verified_attributes = [
+          "email",
+        ]
 }
 
 resource "aws_cognito_user_pool_client" "user_pool_client" {
