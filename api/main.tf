@@ -116,14 +116,14 @@ resource "aws_cognito_user_pool" "user_pool" {
           max_length = "256"
           min_length = "1"
           }
-        }
+  }
   schema {
           attribute_data_type      = "String"
           developer_only_attribute = false
           mutable                  = true
           name                     = "nombre"
           required                 = false
-
+  }
 }
 
 resource "aws_cognito_user_pool_client" "user_pool_client" {
